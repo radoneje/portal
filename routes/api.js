@@ -143,17 +143,39 @@ router.get("/news/:clientId", async (req, res)=> {
 
   var progs=await req.knex.select("*").from("t_prog").where({clientid:req.params.clientId});
   for(const p of progs){
-     var news=await req.knex.select("*").from("t_news").where({progid:p.id}).orderBy("newsDate","desc").limit(20);
+    var news=await req.knex.select("*").from("t_news").where({progid:p.id}).orderBy("newsDate","desc").limit(20);
 
-     news.forEach(n=>{
-       var nn=n;
-       nn.progTitle=p.title;
-       ret.push(nn);
-     })
+    news.forEach(n=>{
+      var nn=n;
+      nn.progTitle=p.title;
+      ret.push(nn);
+    })
+  }
+  return res.partnersProgramsGetjson(ret);
+
+})
+router.get("/newsfromprog/:progId", async (req, res)=> {
+    var news=await req.knex.select("*").from("t_news").where({progid:req.params.progId}).orderBy("newsDate","desc").limit(20);
+  return res.json(news);
+
+})
+router.get("/progs", async (req, res)=> {
+
+  var ret=[];
+
+  var progs=await req.knex.select("*").from("t_prog").orderBy("title");
+
+
+  for(const p of progs){
+    var clients=await req.knex.select("*").from("t_clients").where({id:p.clientid});
+    var tmp=p;
+    tmp.clientTitle=clients[0].title;
+    ret.push(tmp);
   }
   return res.json(ret);
 
 })
+
 router.get("/blocks/:newsId", async (req, res)=> {
   if (!req.session || !req.session.user)
     return res.status(401.7).json({status: -1, msg: "access deny"});

@@ -111,6 +111,14 @@ var mainHeadApp = new Vue({
             el.select();
             document.execCommand('copy');
             document.body.removeChild(el);
+        },
+        copyBlockLink:function (bl) {
+            const el = document.createElement('textarea');
+            el.value = "http://portal.may24.pro/block/"+bl.id;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
         }
 
     },
