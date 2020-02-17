@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  div(class="login-page" id="app")
+    div(class="login-wr" v-bind:class="{'ready':ready}")
+      div(style="text-align: center;")
+        img(src="/images/icons/user-white.svg" style="width:60px; margin:30px auto; margin-bottom:20px")
+        div(style="height: 20px;" class="message") {{message}}
+        form(method="POST"  style="margin:0px 20px"  v-on:submit.stop.prevent="tryLogin()" )
+          input(name="email" id="login" ref="login" placeholder=lang.email v-model="login" v-on:keyDown="loginClick" v-bind:class="{'error':!validateEmail(login)}")
+          input(name="password" id="password" ref="pass" type="password" placeholder=lang.password v-model="pass" v-on:keyDown="passClick" v-bind:class="{'error':!validatePass(password)}")
+
+          div()
+            input(type="submit" value=lang.login v-if="!isLoading")
+            div(v-else style="display: flex; align-items: center;")
+              img(src="/images/icons/spinner.svg" style="width:40px")
+              span loging in ...
+  script(src="/javascripts/loginscript.js")

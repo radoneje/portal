@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  style body{background: #000}
+
+  div(class="main-page" id="main-page" v-bind:class="{loaded:isLoaded}")
+    include elements/head
+    include elements/right
+    include elements/left
+    div(class="main-page-container")
+      div(class="main-page-r")
+  script var clientId=#{clientId};
+  script(src="/javascripts/groupscript.js")
