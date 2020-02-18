@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-const crypto = require('crypto')
+const crypto = require('crypto');
 const hmacsha1 = require('hmacsha1');
 const moment = require('moment');
 
@@ -18,7 +18,7 @@ try {
   var client = clientArr[0];
   var hash = hmacsha1(client.secret, req.body.signature);
   if (hash != req.body.hash)
-    return res.json(-1)
+    return res.json(-1);
 
   var progArr = await req.knex.select("*").from("t_prog").where({clientid: clientId, nfId: req.body.progId});
   if (progArr.length == 0) {
@@ -39,12 +39,12 @@ try {
   await req.knex("t_news").update({
     title: req.body.newsTitle,
     newsDate: moment(req.body.newsDate).format('YYYY-MM-DD HH:mm:ss')
-  }).where({id: news.id})
+  }).where({id: news.id});
 
   for (const bl of req.body.blocks) {
     var blocksArr = await req.knex.select("*").from("t_blocks").where({newsid: news.id, nfid: bl.Id});
     if (blocksArr.length == 0) {
-      console.log("insert ", news.id)
+      console.log("insert ", news.id);
       blocksArr = await req.knex("t_blocks").insert({newsid: news.id, nfid: bl.Id}, "*")
     }
     var block = blocksArr[0];
@@ -92,7 +92,7 @@ router.get("/user", async (req, res)=> {
   delete req.session.user.password;//="";
   return res.json(req.session.user);
 
-})
+});
 router.delete("/user", async (req, res)=> {
   if (!req.session || !req.session.user)
     return res.status(401.7).json({status: -1, msg: "access deny"});
@@ -177,8 +177,7 @@ router.get("/progs", async (req, res)=> {
 })
 
 router.get("/blocks/:newsId", async (req, res)=> {
-  if (!req.session || !req.session.user)
-    return res.status(401.7).json({status: -1, msg: "access deny"});
+
   var ret=[];
   var blocks=await req.knex.select("*").from("t_blocks").where({newsid:req.params.newsId, isDeleted:false}).orderBy("sort");
   return res.json(blocks);

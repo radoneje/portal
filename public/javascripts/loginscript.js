@@ -58,7 +58,7 @@ var app = new Vue({
     },
     mounted: function () {
         var _this=this;
-        _this.login=localStorage.getItem("login", _this.login)||"";
+        _this.login=localStorage.getItem("login")||"";
         setTimeout(()=>{_this.ready=true;_this.$refs.login.focus();},500)
 
     }

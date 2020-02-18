@@ -349,7 +349,6 @@ a {
   right: 40px;
   width: ~"calc((100vw/4) - 40px)";
   background: #222;
-  box-shadow: -1px 0px 6px 0px white;
   box-shadow: -1px 0 6px 0 white;
   z-index: 50;
 }
@@ -504,11 +503,11 @@ h1 {
   font-size: 16px;
  line-height: 1.2;
 }
+
+//noinspection ALL
 pre{
   white-space: pre-wrap;       /* Since CSS 2.1 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-  white-space: -pre-wrap;      /* Opera 4-6 */
-  white-space: -o-pre-wrap;    /* Opera 7 */
   word-wrap: break-word;
 }
 .blocks-wr{
@@ -556,7 +555,7 @@ pre{
   right: 25px;
   height: 20px;
 }
-.icon-copy:hover, icon-back:hover, .icon-copy-link:hover{
+.icon-copy:hover, .icon-back:hover, .icon-copy-link:hover{
   fill:@black;
 }
 .icon-back{

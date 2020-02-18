@@ -11,7 +11,7 @@ router.get('/', login, async (req, res)=> {
     var arr=await req.knex.select("*").from("t_groups").where({id:gId.groupId}).orderBy("title");
     gr=[...gr, ...arr ]
   }
-  var groups=[];
+  groups=[];
   for (const group  of gr) {
 
     var clients=await req.knex.select("*").from("t_clients").where({groupId:group.id}).orderBy("title")

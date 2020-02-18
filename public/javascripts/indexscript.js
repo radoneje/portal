@@ -73,7 +73,7 @@ var mainHeadApp = new Vue({
         var _this=this;
         var r=await axios.get("/rest/api/v1/user")
         _this.user=r.data;
-        _this.reloadNews();
+        await _this.reloadNews();
 
 
     }
