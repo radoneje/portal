@@ -50,7 +50,9 @@ var mainHeadApp = new Vue({
         },
        reloadNews:async function(){
            var _this=this;
+
             var r=await axios.get("/rest/api/v1/news/"+clientId);
+
             this.news=r.data;
        },
         newsClick:async function(newsItem){
@@ -132,12 +134,14 @@ var mainHeadApp = new Vue({
     },
     mounted: async function () {
         var _this=this;
+
         var r=await axios.get("/rest/api/v1/user")
         _this.user=r.data;
-        await _this.reloadNews();
         setTimeout(function(){
             _this.isLoaded=true;
         },0)
+        await _this.reloadNews();
+
     }
 });
 function validateEmail(email) {

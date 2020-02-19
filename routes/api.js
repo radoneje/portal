@@ -151,7 +151,7 @@ router.get("/news/:clientId", async (req, res)=> {
       ret.push(nn);
     })
   }
-  return res.partnersProgramsGetjson(ret);
+  return res.json(ret);
 
 })
 router.get("/newsfromprog/:progId", async (req, res)=> {
