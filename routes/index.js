@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const lang=require('../lang')
+const moment=require('moment')
 
 /* GET home page. */
 router.get('/', login, async (req, res)=> {
@@ -40,6 +41,17 @@ router.get('/point/:id', login, async (req, res)=> {
 router.all('/login', async (req, res, next)=>{
   //req.session.user=null;
   res.render('login', { title: '', lang:lang.en })
+});
+router.get("/block/:id",async (req, res)=>{
+  try {
+    var items = await req.knex.select("*").from("v_blockwithnews").where({id: req.params.id});
+    console.log(items)
+    res.render("block", { item: items[0], lang:lang.en, newsDate:moment(items[0].newsDate).format("DD.MM.YYYY HH:mm") })
+  }
+  catch (e) {
+    console.log(e)
+    res.sendStatus(404);
+  }
 })
 
 module.exports = router;

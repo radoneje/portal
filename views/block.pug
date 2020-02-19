@@ -1,0 +1,20 @@
+extends layout
+
+block logo
+  include elements/logo
+block content
+  div(class="main-page loaded" id="main-page")
+    div.blockH1 #{item.client} / #{item.prog}
+
+    div.blockBox
+      div.newsTitle  #{item.news}  #{newsDate}
+      div.blockTitle #{item.title}
+      div.blockAuthor
+        i #{lang.author}:&nbsp;
+        span #{item.author}
+      pre.blockText   #{item.text}
+
+    div.center
+
+
+

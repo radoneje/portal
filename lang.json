@@ -2,6 +2,7 @@
   {
     "email": "E-mail",
     "password": "Password",
-    "login": "Log in"
+    "login": "Log in",
+    "author": "Writer"
   }
 }
