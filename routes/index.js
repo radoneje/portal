@@ -45,8 +45,7 @@ router.all('/login', async (req, res, next)=>{
 router.get("/block/:id",async (req, res)=>{
   try {
     var items = await req.knex.select("*").from("v_blockwithnews").where({id: req.params.id});
-    console.log(items)
-    res.render("block", { item: items[0], lang:lang.en, newsDate:moment(items[0].newsDate).format("DD.MM.YYYY HH:mm") })
+    res.render("block", { item: items[0],title:items[0].title, lang:lang.en, newsDate:moment(items[0].newsDate).format("DD.MM.YYYY HH:mm") })
   }
   catch (e) {
     console.log(e)
