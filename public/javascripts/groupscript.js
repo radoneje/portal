@@ -101,7 +101,7 @@ var mainHeadApp = new Vue({
 
             var alertElem=document.createElement("div")
             alertElem.classList.add("confirmModal");
-            alertElem.innerHTML="link is copied";
+            alertElem.innerHTML="text is copied";
             document.querySelector("body").appendChild(alertElem);
             alertElem.style.top=(e.clientY+10)+"px";
             alertElem.style.left=(e.clientX - alertElem.clientWidth/2)+"px";
