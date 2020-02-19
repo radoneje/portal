@@ -12,6 +12,14 @@ block content
       div.blockAuthor
         i #{lang.author}:&nbsp;
         span #{item.author}
+      div.blockState
+        if(item.isReady && !item.isApprove)
+          span #{lang.textIs} #{lang.ready}
+        if(item.isApprove)
+          span #{lang.textIs} #{lang.approve}
+        if(!item.isReady && !item.isApprove)
+          span #{lang.textIs} #{lang.NotReady}
+
       pre.blockText   #{item.text}
 
     div.center

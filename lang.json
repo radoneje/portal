@@ -3,6 +3,10 @@
     "email": "E-mail",
     "password": "Password",
     "login": "Log in",
-    "author": "Writer"
+    "author": "Writer",
+    "textIs": "Text is",
+    "ready": "ready to check",
+    "approve": "approve by editor",
+    "NotReady": " is writing..."
   }
 }

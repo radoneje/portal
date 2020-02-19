@@ -97,15 +97,24 @@ var mainHeadApp = new Vue({
             console.log(this.blocks)
 
         },
-        copyBlock:function (bl) {
-           // console.log(bl, this.$refs)
-           // var elem=document.querySelector("#block"+bl.id);
-          //  console.log(elem);
+        copyBlock:function (bl, e) {
+
+            var alertElem=document.createElement("div")
+            alertElem.classList.add("confirmModal");
+            alertElem.innerHTML="link is copied";
+            document.querySelector("body").appendChild(alertElem);
+            alertElem.style.top=(e.clientY+10)+"px";
+            alertElem.style.left=(e.clientX - alertElem.clientWidth/2)+"px";
+            alertElem.style.opacity="1";
+            setTimeout(()=>{alertElem.style.opacity="0";},1000);
+            setTimeout(()=>{alertElem.parentNode.removeChild(alertElem)},3000);
+
             var elem = document.querySelector("#block"+bl.id);//.textContent;
             var text=elem.querySelector(".block-type").textContent+"\r\n";
             text+=elem.querySelector(".block-title").textContent+"\r\n";
             text+=elem.querySelector(".block-author").textContent+"\r\n\r\n";
             text+=elem.querySelector(".block-text").textContent+"\r\n\r\n";
+
 
             const el = document.createElement('textarea');
             el.value = text;
@@ -114,13 +123,23 @@ var mainHeadApp = new Vue({
             document.execCommand('copy');
             document.body.removeChild(el);
         },
-        copyBlockLink:function (bl) {
+        copyBlockLink:function (bl, e) {
             const el = document.createElement('textarea');
             el.value = "http://portal.may24.pro/block/"+bl.id;
             document.body.appendChild(el);
             el.select();
             document.execCommand('copy');
             document.body.removeChild(el);
+
+            var alertElem=document.createElement("div")
+            alertElem.classList.add("confirmModal");
+            alertElem.innerHTML="link is copied";
+            document.querySelector("body").appendChild(alertElem);
+            alertElem.style.top=(e.clientY+10)+"px";
+            alertElem.style.left=(e.clientX - alertElem.clientWidth/2)+"px";
+            alertElem.style.opacity="1";
+            setTimeout(()=>{alertElem.style.opacity="0";},1000);
+            setTimeout(()=>{alertElem.parentNode.removeChild(alertElem)},3000);
         }
 
     },
