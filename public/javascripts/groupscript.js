@@ -232,21 +232,23 @@ var mainHeadApp = new Vue({
             text+=elem.querySelector(".block-author").textContent+"\r\n\r\n";
             text+=elem.querySelector(".block-text").textContent+"\r\n\r\n";
 
-
-            const el = document.createElement('textarea');
+            Clipboard.copy(text);
+           /* const el = document.createElement('textarea');
             el.value = text;
             document.body.appendChild(el);
             el.select();
             document.execCommand('copy');
-            document.body.removeChild(el);
+            document.body.removeChild(el);*/
         },
         copyBlockLink:function (bl, e) {
-            const el = document.createElement('textarea');
+            /*const el = document.createElement('textarea');
             el.value = "http://portal.may24.pro/block/"+bl.id;
             document.body.appendChild(el);
             el.select();
             document.execCommand('copy');
-            document.body.removeChild(el);
+            document.body.removeChild(el);*/
+
+            Clipboard.copy("http://portal.may24.pro/block/"+bl.id);
 
             var alertElem=document.createElement("div")
             alertElem.classList.add("confirmModal");
@@ -306,5 +308,50 @@ function CopyToClipboard(containerid) {
         document.execCommand("copy");
         alert("text copied")
     }}
+window.Clipboard = (function(window, document, navigator) {
+    var textArea,
+        copy;
+
+    function isOS() {
+        return navigator.userAgent.match(/ipad|iphone/i);
+    }
+
+    function createTextArea(text) {
+        textArea = document.createElement('textArea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+    }
+
+    function selectText() {
+        var range,
+            selection;
+
+        if (isOS()) {
+            range = document.createRange();
+            range.selectNodeContents(textArea);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        } else {
+            textArea.select();
+        }
+    }
+
+    function copyToClipboard() {
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+
+    copy = function(text) {
+        createTextArea(text);
+        selectText();
+        copyToClipboard();
+    };
+
+    return {
+        copy: copy
+    };
+})(window, document, navigator);
 
 
