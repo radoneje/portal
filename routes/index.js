@@ -34,7 +34,7 @@ router.get('/', login, async (req, res)=> {
   next();
 }
 router.get('/point/:id', login, async (req, res)=> {
-  res.render('group', { title: 'Новости', lang:lang.en, clientId:1 });
+  res.render('group', { title: 'Новости', lang:lang.en, clientId:req.params.id, user:req.session.user });
 
 });
 

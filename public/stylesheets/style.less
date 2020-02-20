@@ -107,10 +107,12 @@
 /* latin */
 @color: #32bcad;
 @red:#ff0000;
+@green: #2fff0f;
 @black:#000;
 @white:#fff;
 @gray:#888;
 @dark:#333;
+@middle:#e0dede;
 
 @font-face {
   font-family: 'Raleway';
@@ -209,7 +211,8 @@ a {
   right: 40px;
  // width: ~"calc(100% - 40px)";
   margin-left: 10px;
-  background: @black;
+  background: rgba(0, 0, 0, 0.58);
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -382,6 +385,7 @@ a {
   padding: 5px;
   position: relative;
   width: ~"calc(100% - 22px)";
+  border-radius: 2px;
 
 }
 .copybox-wr{
@@ -421,7 +425,7 @@ a {
   padding: 15px;
   padding-bottom: 10px;
   cursor: pointer;
-
+  border-radius: 2px;
 }
 .news-item:hover{
   background: @dark;
@@ -487,14 +491,15 @@ h1 {
   width: 30px; display: inline-block; color: @gray;
 }
 .block-type{
-   width: 90px; display: inline-block; font-weight: bold; font-size: 18px; margin-right: 10px;
+   width: 90px; display: inline-block; font-weight: bold;  margin-right: 10px;
   padding: 4px;
+  font-size: 16px;
  }
 .block-title{
   width: ~"calc(100% - 30px - 98px - 20px)"; display: inline-block;  font-size: 18px;
 }
 .block-author{
-  margin:5px 40px;
+  margin:5px 32px;
 
 }
 .block-text{
@@ -528,6 +533,7 @@ pre{
 .block-type{
   background: @gray;
   color:@white;
+  border-radius: 2px;
 }
 .block-item.ready .block-type{
   background: yellow;
@@ -640,5 +646,134 @@ pre{
   opacity: 0;
   transition: opacity .5s ease;
 }
+.groupBox{
+  padding: 20px;
+}
+.groupWr{
+  margin: 20px 0;
+  max-height:~"calc(100vh - 40px)";
+  overflow-y: scroll;
+}
+.loadBtn{
+  border: 1px solid;
+  border-color: @gray;
+  color:@gray;
+  padding: 4px;
+  border-radius: 2px;
+  transition: color,border-color .5s ease ;
+  margin: 20px 0;
+  width: max-content;
+  cursor: pointer;
+}
+.loadInverseBtn{
+  border: 1px solid;
+  border-color: @dark;
+  color:@dark;
+  padding: 4px;
+  border-radius: 2px;
+  transition: color,border-color .5s ease ;
+  margin-bottom: 10px;
+  margin-top:-10px;
+  width: max-content;
+  cursor: pointer;
+  font-size: 10px;
+  background: #adadad;
+}
+.loadInverseBtn:hover {
+  border-color: @black;
+  color: @black;
+}
+.loadBtn:hover {
+  border-color: @white;
+  color: @white;
+}
+.SgroupItem{
+  margin-bottom: 10px;
+  background: @gray;
+}
+.SgroupItem input{
+  padding: 4px;
+  border:1px solid @gray;
+  width: ~"calc(100% - 10px)";
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+.Scompany{
+  padding: 0 10px;
+  display: flex;
+}
+.Scompany span{
+  font-size: 12px;
+  color: @middle;
+}
+.groups{
+  max-height: ~"calc(100vh - 110px)";
+  overflow-y: auto;
+}
+div.status{
+ position: relative;
+}
+div.status:before{
+  content: "";
+  position: absolute;
+  width: 10px;
+  right: 4px;
+  top: ~"calc(50% - 10px)";
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity .5s;
+  background-color: @green;
+}
+div.status.success:before{
+  opacity: 1;
+}
+.upArrow{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0,0,0,.25);
+  border-radius: 50%;
+  z-index: 100;
+  cursor: pointer;
+  border:1px solid @gray;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.upArrow svg{
+  fill:@gray;
+  width: 30px;
+  height: 30px;
+
+}
+@tablet: 768px;
+@media (max-width: @tablet) {
+  .main-right{
+    display: none;
+  }
+  .news-box {
+    position: absolute;
+    width: calc(100vw  - 10px);
+    height: 100vh;
+  }
+  .issues-box {
+    position: absolute;
+    left: 5px;
+    width: calc(100vw  - 15px );
+    top:100vh;
+
+    padding-left: 5px;
+  }
+  .main-head{
+    display: none;
+  }
+  .upArrow{
+    display: flex;
+  }
+}
+
 
 

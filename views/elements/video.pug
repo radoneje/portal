@@ -1,1 +1,24 @@
-span video
+div.groupBox
+    h2 Пользователи
+    div
+        div.loadBtn(@click="usersLoad()" style="display:inline-block") Загрузить
+        div.loadBtn(@click="usersAdd()" style="display:inline-block") Добавить
+    div.groups
+        img(src="/images/icons/spinner.svg" v-if="groupsIsLoad")
+        div(v-else)
+            div.SgroupItem(v-for="item in users" style="padding-bottom: 5px;")
+                div
+                    input(v-model="item.email" v-on:change="changeMainUser(item, $event)" placeholder="Email")
+                    div(style="display:flex; margin-top:-10px;margin-bottom:-10px")
+                        div(style="width:50%")
+                            input(v-model="item.suName" v-on:change="changeMainUser(item, $event)" placeholder="Фамилия")
+                        div(style="width:50%")
+                            input(v-model="item.name" v-on:change="changeMainUser(item, $event)" placeholder="Имя")
+                    input(type="password" style="" v-model="item.password" v-on:change="changeMainUser(item, $event)" placeholder="Пароль")
+                    input(type="checkbox" style="width:inherit" v-model="item.isAdmin" v-on:change="changeMainUser(item, $event)")
+                    span Админ
+                div(style="margin-bottom:10px")
+                    div.SgroupItem(v-for="c in groups")
+                        div.Scompany
+                            input(type="checkbox" style="width:inherit;margin: 0 10px 0 0" v-bind:checked="item.groups.filter(e=>e.groupId==c.id).length>0" v-on:change="changeUserGroup(item, c, $event)")
+                            span {{c.title}}

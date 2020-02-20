@@ -12,9 +12,123 @@ var mainHeadApp = new Vue({
         blocks:[],
         blocksFiltered:[],
         isLoaded:false,
-
+        groups:[],
+        groupsIsLoad:false,
+        users:[],
+        list:[],
+        listEndLoad:false
     },
     methods: {
+        upArrow:function(){
+            var element = document.querySelector(".news-item.active");
+            if(element)
+                element.scrollIntoView({ behavior: 'smooth', block: 'center'});
+        },
+        initDashboard:async function(){
+            var _this=this;
+            await this.reloadList();
+            setTimeout(()=>{
+            var options = {
+                root: null,//document.querySelector('#loadingBox'),
+                rootMargin: '0px',
+                threshold: 1
+            }
+            var callback = async function(entries, observer) {
+
+                if(entries[0].isIntersecting){
+
+                    var r=await axios.get("/rest/api/v1/list/"+clientId, { params:{}, headers: { "x-skip": _this.list.length }});
+                    if(r.data.length==0)
+                        _this.listEndLoad=true;
+                    else
+                        _this.listEndLoad=false;
+                    _this.list=[..._this.list, ...r.data];
+                }
+            };
+            var observer = new IntersectionObserver(callback, options);
+            var target = document.querySelector('#loadingBox')
+            observer.observe(target);
+            },1000);
+        },
+        reloadList:async function(){
+
+           /* var _this=this;
+            _this.listEndLoad=false;
+            var r=await axios.get("/rest/api/v1/list/"+clientId, { headers: { "x-skip": this.list.length }});
+            this.list=r.data;*/
+        },
+
+        changeUserGroup:async function(u, g, e) {
+
+         await   axios.post("/rest/api/v1/usergroup", {userId:u.id, groupId:g.id, state:e.target.checked})
+            e.target.parentNode.classList.add("status");
+            e.target.parentNode.classList.add("success");
+            setTimeout(()=>{ e.target.parentNode.classList.remove("success");},1000)
+            setTimeout(()=>{ e.target.parentNode.classList.remove("status");},2000)
+
+        },
+        usersLoad:async function(c){
+
+            this.groupsIsLoad=true;
+            var res=await axios.get("/rest/api/v1/users");
+            this.groups=(await axios.get("/rest/api/v1/groups")).data;
+            this.groupsIsLoad=false;
+            this.users=res.data;
+        },
+        usersAdd:async function(c){
+
+            this.groupsIsLoad=true;
+            var res=await axios.put("/rest/api/v1/users");
+            this.groupsIsLoad=false;
+            this.users=res.data;
+        },
+        changeMainUser:async function(c, e){
+            var res=await axios.post("/rest/api/v1/mainuser/",c);
+
+            e.target.parentNode.classList.add("status");
+            e.target.parentNode.classList.add("success");
+            setTimeout(()=>{ e.target.parentNode.classList.remove("success");},1000)
+            setTimeout(()=>{ e.target.parentNode.classList.remove("status");},2000)
+        },
+        groupsAdd:async function(c){
+
+            this.groupsIsLoad=true;
+            var res=await axios.put("/rest/api/v1/groups");
+            this.groupsIsLoad=false;
+            res.data.companies=[];
+            this.groups=res.data;
+        },
+        changeCompany:async function(c, e){
+            var res=await axios.post("/rest/api/v1/changeCompany/",c);
+            e.target.parentNode.classList.add("status");
+            e.target.parentNode.classList.add("success");
+            setTimeout(()=>{ e.target.parentNode.classList.remove("success");},1000)
+            setTimeout(()=>{ e.target.parentNode.classList.remove("status");},2000)
+        },
+        changeGroup:async function(c, e){
+            var res=await axios.post("/rest/api/v1/changeGroup/",c);
+            e.target.parentNode.classList.add("status");
+            e.target.parentNode.classList.add("success");
+            setTimeout(()=>{ e.target.parentNode.classList.remove("success");},1000)
+            setTimeout(()=>{ e.target.parentNode.classList.remove("status");},2000)
+        },
+        companiesAdd:async function (item){
+
+            this.groupsIsLoad=true;
+            var res=await axios.post("/rest/api/v1/addCompany/"+item.id);
+            this.groupsIsLoad=false;
+            res.data.companies=[];
+            this.groups=res.data;
+
+
+        },
+        groupsLoad:async function (){
+            this.groupsIsLoad=true;
+            var res=await axios.get("/rest/api/v1/groups");
+            this.groupsIsLoad=false;
+            res.data.companies=[];
+            this.groups=res.data;
+        },
         exitClick:async function () {
             await axios.delete("/rest/api/v1/user")
             document.location.href="/login";
@@ -34,6 +148,8 @@ var mainHeadApp = new Vue({
                 this.panels[k]=ctrl==k;
             });
 
+            if(this.panels["dashboard"]==true)
+                this.initDashboard();
         },
         changeTabs: async function(ctrl){
             var _this=this;
@@ -47,12 +163,11 @@ var mainHeadApp = new Vue({
             Object.keys(_this.tabs).forEach(k=>{
                 _this.tabIsOpen=_this.tabIsOpen||_this.tabs[k];
             });
+
         },
        reloadNews:async function(){
            var _this=this;
-
             var r=await axios.get("/rest/api/v1/news/"+clientId);
-
             this.news=r.data;
        },
         newsClick:async function(newsItem){
@@ -68,6 +183,8 @@ var mainHeadApp = new Vue({
             setTimeout(()=>{
                 _this.blocks=[];
                 _this.reloadBlocks();
+                var element = document.querySelector("#curr-news-title");
+                element.scrollIntoView({ behavior: 'smooth', block: 'start'});
             },0)
         },
         reloadBlocks:async function(){
@@ -160,6 +277,9 @@ var mainHeadApp = new Vue({
             _this.isLoaded=true;
         },0)
         await _this.reloadNews();
+
+
+
 
     }
 });

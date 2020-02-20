@@ -11,8 +11,10 @@ var mainHeadApp = new Vue({
         news:{},
         currNews:{},
 
+
     },
     methods: {
+
         exitClick:async function () {
             await axios.delete("/rest/api/v1/user")
             document.location.href="/login";

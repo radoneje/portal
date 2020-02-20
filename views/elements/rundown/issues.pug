@@ -1,4 +1,4 @@
-div(class="curr-news-title")
+div(class="curr-news-title" id="curr-news-title")
     span(v-if="!currNews.newsDate") Выберите выпуск
     span(v-else) {{moment(currNews.newsDate).format("dddd, DD MMMM, HH-mm")}}, {{currNews.title}}
 div(class="blocks-wr")

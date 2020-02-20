@@ -183,5 +183,115 @@ router.get("/blocks/:newsId", async (req, res)=> {
   return res.json(blocks);
 
 })
+router.get("/groups", groups);
+router.put("/groups", async (req, res)=> {
+  await req.knex("t_groups").insert({title:""});
+  console.log("put")
+  await groups(req, res);
+});
+async function groups(req, res){
+  if (!req.session || !req.session.user)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
 
+  var dt=await req.knex.select("*").from("t_groups").orderBy("title");
+  for(var g of dt){
+    var cs=await req.knex.select("*").from("t_clients").where({groupId:g.id}).orderBy("title");
+    g.companies=cs;
+  }
+
+  res.json(dt);
+}
+router.post("/addCompany/:grId", async (req, res)=> {
+  if (!req.session || !req.session.user || !req.session.user.isAdmin)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+  await req.knex("t_clients").insert({groupId:req.params.grId});
+  await groups(req, res);
+})
+
+router.get("/companies/:grId", async (req, res)=> {
+  if (!req.session || !req.session.user)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+
+  var dt=await req.knex.select("*").from("t_clients").where({groupId:req.params.grId}).orderBy("title");
+
+  res.json(dt);
+
+});
+router.post("/changeCompany", async (req, res)=> {
+  if (!req.session || !req.session.user || !req.session.user.isAdmin)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+  var id=req.body.id;
+  delete req.body.id
+
+  await req.knex("t_clients").update(req.body).where({id:id});
+  await groups(req, res);
+})
+router.post("/changeGroup", async (req, res)=> {
+  if (!req.session || !req.session.user || !req.session.user.isAdmin)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+  var id=req.body.id;
+  delete req.body.id
+  delete req.body.companies
+
+  await req.knex("t_groups").update(req.body).where({id:id});
+  await groups(req, res);
+})
+
+
+router.get("/users", users);
+router.put("/users", async (req, res)=> {
+
+ var dd= await req.knex("t_users").insert({name:"", suName:"", email:"", isDeleted:false, phone:"", readRate:0, password:"", fb:false, isAdmin:false}, "*");
+
+ await users(req, res);
+});
+async function users(req, res){
+  if (!req.session || !req.session.user)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+
+  var dt=await req.knex.select("*").from("t_users").where({isDeleted:false}).orderBy(["suName","name","email"]);
+  for(var g of dt){
+    var groups=await req.knex.select("*").from("t_userToGroup").where({userId:g.id})
+    g.groups=groups;
+  }
+
+  res.json(dt);
+}
+router.post("/mainuser", async (req, res)=> {
+  if (!req.session || !req.session.user || !req.session.user.isAdmin)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+
+
+  var id=req.body.id;
+  delete req.body.id;
+  delete req.body.groups;
+
+  await req.knex("t_users").update(req.body).where({id:id});
+
+  await users(req, res);
+});
+
+router.post("/usergroup", async (req, res)=> {
+  if (!req.session || !req.session.user || !req.session.user.isAdmin)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+
+  if(req.body.state)
+    await req.knex("t_userToGroup").insert({userId:req.body.userId, groupId:req.body.groupId});
+  else
+    await req.knex("t_userToGroup").delete().where({userId:req.body.userId, groupId:req.body.groupId});
+  await users(req, res);
+});
+router.get("/list/:clientId", async (req, res)=> {
+  if (!req.session || !req.session.user)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+  var skip=req.headers["x-skip"];
+  var list=await req.knex.select("*")
+      .from("v_blockwithnews")
+      .where({"clientid":req.params.clientId})
+      .orderBy([ { column: 'newsDate', order: 'desc' }, "sort"])
+      .limit(5).offset(skip)
+
+  return res.json(list);
+
+})
 module.exports = router;

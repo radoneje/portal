@@ -2,5 +2,6 @@ div(class="main-left")
     transition(name="fade" mode="out-in")
         div(v-if="panels.rundown" style="height:100%")
             include rundown/rundownBox
-        div(v-if="panels.dashboard") dashboard
+        div(v-if="panels.dashboard")
+            include rundown/dashboard
 

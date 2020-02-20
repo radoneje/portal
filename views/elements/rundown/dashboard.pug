@@ -1,0 +1,13 @@
+div(style="max-height:100vh;overflow-y: auto;")
+    div(v-for=" item in list")
+        div.blockBox
+            div.newsTitle  {{item.client}} {{item.news}}  {{moment(item.newsDate).format("DD.MM.YYYY HH:mm")}}
+            div.blockTitle {{item.title}}
+            div.blockAuthor
+                span {{item.author}}
+            div.blockState
+
+
+            pre.blockText   {{item.text}}
+    div.loadingBox(id="loadingBox" v-if="!listEndLoad")
+            img(src="/images/icons/spinner.svg" STYLE="width:40px")

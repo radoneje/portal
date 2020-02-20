@@ -1,1 +1,22 @@
-span Archive
+div.groupBox
+    h2 Группы компаний
+    div
+        div.loadBtn(@click="groupsLoad()" style="display:inline-block") Загрузить
+        div.loadBtn(@click="groupsAdd()" style="display:inline-block") Добавить
+    div.groups
+        img(src="/images/icons/spinner.svg" v-if="groupsIsLoad")
+        div(v-else)
+            div.SgroupItem(v-for="item in groups")
+                div
+                    input(v-model="item.title" v-on:change="changeGroup(item, $event)")
+                div.loadInverseBtn(@click="companiesAdd(item)") Добавить компании
+                div.SgroupItem(v-for="c in item.companies")
+                    div.Scompany
+                        div(style="width:50%")
+                            span Title
+                            div
+                                input(v-model="c.title" v-on:change="changeCompany(c, $event)")
+                        div(style="width:50%")
+                            span Secret
+                            div
+                            input(v-model="c.secret" v-on:change="changeCompany(c, $event)")
