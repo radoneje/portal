@@ -82,7 +82,7 @@ router.post('/login', async (req, res, next)=> {
       .select("*")
       .from("t_userToGroup")
       .where({userId:q[0].id});*/
- var utp=logins.filter(e=>{return e.email==req.body.login && e.pass==req.body.pass});
+ var utp=logins.filter(e=>{return e.email==req.body.login.toLowerCase() && e.pass==req.body.pass});
   if(utp.length==0)
   {return res.status(404).send("not found")};
   req.session.user=utp[0];
