@@ -1,0 +1,86 @@
+div.descrTextItem(v-for="block in blocks" v-bind:class="{approve:block.isApprove, ready:block.isReady}")
+    div.descrTextItemHead
+        div.diType {{block.type}}
+        div.diTitle {{block.title}}
+        div.diPtogramm
+            div(style="display: flex; align-items: center;")
+                <svg width="18px" height="20px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop-HD" transform="translate(-452.000000, -571.000000)" fill-rule="nonzero">
+                <g id="Group-2" transform="translate(115.000000, 568.000000)">
+                <g id="ic-round-date-range" transform="translate(334.000000, 1.000000)">
+                <g id="Icon">
+                <path d="M19,4 L18,4 L18,3 C18,2.45 17.55,2 17,2 C16.45,2 16,2.45 16,3 L16,4 L8,4 L8,3 C8,2.45 7.55,2 7,2 C6.45,2 6,2.45 6,3 L6,4 L5,4 C3.89,4 3.01,4.9 3.01,6 L3,20 C3,21.1045695 3.8954305,22 5,22 L19,22 C20.1,22 21,21.1 21,20 L21,6 C21,4.9 20.1,4 19,4 Z M19,19 C19,19.55 18.55,20 18,20 L6,20 C5.45,20 5,19.55 5,19 L5,9 L19,9 L19,19 Z M7,11 L9,11 L9,13 L7,13 L7,11 Z M11,11 L13,11 L13,13 L11,13 L11,11 Z M15,11 L17,11 L17,13 L15,13 L15,11 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                </g>
+                </g>
+                </g>
+                </g>
+                </g>
+                </svg>
+                span &nbsp; {{moment(block.newsDate).format('DD.MM.YYYY HH:mm')}}
+
+
+    div.descrTextItemBody
+        div.diTextWr
+            div.diAutor
+                div
+                    <svg width="18px" height="20px" viewBox="0 0 18 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Desktop-HD" transform="translate(-476.000000, -569.000000)" fill-rule="nonzero">
+                    <g id="Group-2" transform="translate(115.000000, 568.000000)">
+                    <g id="cil-user-female" transform="translate(358.000000, 1.000000)">
+                    <g id="Icon">
+                    <path d="M18.919,16.109 L15.505,13.89 L16.127,12.75 L17.225,12.75 C17.9842075,12.7500937 18.6922653,12.3673091 19.1079855,11.7320354 C19.5237057,11.0967617 19.5910204,10.2946778 19.287,9.599 L19.293,9.613 L16.949,4.245 C16.205,2.191 14.271,0.75 12,0.75 C9.729,0.75 7.795,2.191 7.062,4.209 L7.05,4.246 L4.706,9.614 C4.40821628,10.3091243 4.4795445,11.1073471 4.89585708,11.7386606 C5.31216967,12.369974 6.01777723,12.7499285 6.774,12.75 L7.872,12.75 L8.494,13.89 L5.08,16.109 C4.01662779,16.7981413 3.37452241,17.9788473 3.374,19.246 L3.374,23.25 L20.6240008,23.25 L20.624,19.253 L20.624,19.246 C20.6247984,17.984409 19.9883292,16.8077687 18.932,16.118 L18.918,16.109 L18.919,16.109 Z M19.125,21.75 L4.8749994,21.75 L4.875,19.253 L4.875,19.249 C4.8744459,18.4920222 5.25624705,17.7859722 5.89,17.372 L5.899,17.367 L10.477,14.391 L8.764,11.25 L6.775,11.25 C6.5221736,11.25006 6.2863322,11.1227351 6.1476746,10.9113226 C6.00901699,10.69991 5.98620653,10.4328661 6.087,10.201 L6.085,10.206 L8.437,4.82 L8.458,4.766 C8.984,3.288 10.371,2.249 12,2.249 C13.629,2.249 15.016,3.288 15.534,4.74 L15.542,4.766 L15.551,4.793 L17.914,10.205 C18.0127191,10.4366789 17.9885741,10.7024378 17.8497185,10.9125323 C17.7108629,11.1226269 17.4758345,11.2490088 17.224,11.249 L15.235,11.249 L13.522,14.39 L18.1,17.366 C18.7381164,17.7793525 19.1235309,18.4877022 19.124,19.248 L19.124,19.252 L19.125,21.75 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                    <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </svg>
+                    span.diPtogramm &nbsp; {{block.author}}
+                div(v-if="block.isReady")
+                    <svg width="12px" height="11px" viewBox="0 0 12 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Desktop-HD" transform="translate(-408.000000, -565.000000)" fill-rule="nonzero">
+                    <g id="Group-2" transform="translate(115.000000, 561.000000)">
+                    <g id="dashicons-yes" transform="translate(288.000000, 0.000000)">
+                    <g id="Icon">
+                    <polygon id="Icon-Shape" fill="#FFFFFF" points="14.83 4.89 16.17 5.83 10.36 14.21 9.02 14.21 5.78 9.67 7.12 8.42 9.69 10.82"></polygon>
+                    <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="20" height="20"></rect>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </svg>
+                    span(v-if="block.isReady && !block.isApprove") &nbsp; Текст готов
+                    span(v-if="block.isApprove && block.isReady") &nbsp; Текст принят
+            div.diText {{block.text}}
+            div.copyButton(v-on:click="copyBlockTextToBuff(block.text)")
+                <svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop-HD" transform="translate(-100.000000, -211.000000)" fill-rule="nonzero">
+                <g id="ant-design:copy-outlined" transform="translate(98.000000, 210.000000)">
+                <g id="Icon">
+                <path d="M14.625,1.125 L5.203125,1.125 C5.12578125,1.125 5.0625,1.18828125 5.0625,1.265625 L5.0625,2.25 C5.0625,2.32734375 5.12578125,2.390625 5.203125,2.390625 L13.921875,2.390625 L13.921875,14.484375 C13.921875,14.5617187 13.9851563,14.625 14.0625,14.625 L15.046875,14.625 C15.1242187,14.625 15.1875,14.5617187 15.1875,14.484375 L15.1875,1.6875 C15.1875,1.37636719 14.9361328,1.125 14.625,1.125 Z M12.375,3.375 L3.375,3.375 C3.06386719,3.375 2.8125,3.62636719 2.8125,3.9375 L2.8125,13.2662109 C2.8125,13.415625 2.87226563,13.5580078 2.97773438,13.6634766 L6.02402344,16.7097656 C6.06269531,16.7484375 6.10664063,16.7800781 6.15410156,16.8064453 L6.15410156,16.8398438 L6.22792969,16.8398438 C6.28945312,16.8626953 6.35449219,16.875 6.42128906,16.875 L12.375,16.875 C12.6861328,16.875 12.9375,16.6236328 12.9375,16.3125 L12.9375,3.9375 C12.9375,3.62636719 12.6861328,3.375 12.375,3.375 Z M6.15234375,15.0503906 L4.63886719,13.5351562 L6.15234375,13.5351562 L6.15234375,15.0503906 Z M11.671875,15.609375 L7.27734375,15.609375 L7.27734375,13.1132812 C7.27734375,12.7248047 6.96269531,12.4101562 6.57421875,12.4101562 L4.078125,12.4101562 L4.078125,4.640625 L11.671875,4.640625 L11.671875,15.609375 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="18" height="18"></rect>
+                </g>
+                </g>
+                </g>
+                </g>
+                </svg>
+                span &nbsp;Копировать

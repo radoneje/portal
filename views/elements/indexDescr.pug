@@ -1,0 +1,131 @@
+div
+    div.dTitle {{activeItem.title }} {{activeItem.smi }}
+        div.dMenu
+            div.dMenuItem(v-bind:class="{active:isTextActive}" v-on:click="setTextActive(true)")
+                svg(width="12px" height="16px" viewBox="0 0 12 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink")
+                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Desktop-HD" transform="translate(-366.000000, -570.000000)" fill-rule="nonzero">
+                    <g id="Group-2" transform="translate(115.000000, 568.000000)">
+                    <g id="dashicons-media-text" transform="translate(247.000000, 0.000000)">
+                    <g id="Icon">
+                    <path class="iconPath" d="M12,2 L16,6 L16,18 L4,18 L4,2 L12,2 Z M5,3 L5,4 L11,4 L11,3 L5,3 Z M12,6 L15,6 L12,3 L12,6 Z M5,5 L5,6 L11,6 L11,5 L5,5 Z M15,8 L15,7 L5,7 L5,8 L15,8 Z M15,10 L15,9 L5,9 L5,10 L15,10 Z M15,12 L15,11 L5,11 L5,12 L15,12 Z M11,14 L11,13 L5,13 L5,14 L11,14 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                    <rect  id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="20" height="20"></rect>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+
+                span &nbsp; Тексты
+            div.dMenuItem(v-bind:class="{active:!isTextActive}" v-on:click="setTextActive(false)")
+                svg( width="19px" height="18px" viewBox="0 0 19 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink")
+                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                    <desc>Created with Sketch.</desc>
+                    <defs></defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Desktop-HD" class="iconPath" transform="translate(-334.000000, -583.000000)" fill="#fff" fill-rule="nonzero">
+                    <g id="Group-2" transform="translate(115.000000, 568.000000)">
+                    <g id="bx-bx-line-chart" transform="translate(216.000000, 12.000000)">
+                    <g id="Icon">
+                    <path d="M3,3 L3,20 C3,20.5522847 3.44771525,21 4,21 L21,21 L21,19 L5,19 L5,3 L3,3 Z" id="Icon-Shape"></path>
+                    <path d="M15.293,14.707 C15.4803974,14.8947164 15.7347544,15.0002012 16,15.0002012 C16.2652456,15.0002012 16.5196026,14.8947164 16.707,14.707 L21.707,9.707 L20.293,8.293 L16,12.586 L13.707,10.293 C13.5196026,10.1052836 13.2652456,9.99979884 13,9.99979884 C12.7347544,9.99979884 12.4803974,10.1052836 12.293,10.293 L7.293,15.293 L8.707,16.707 L13,12.414 L15.293,14.707 Z" id="Icon-Shape"></path>
+                    <rect id="Icon-Rectangle-path" fill-opacity="0" x="0" y="0" width="24" height="24"></rect>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+                    </g>
+
+                span &nbsp Аналитика
+    div.descrWr(v-if="isTextActive")
+        div.descrText.blackScroll(v-if="blocks!=null")
+            include descrTextItem
+        div(v-else)
+            <svg style="width: 50px;" version="1.1" id="L4" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+            <circle fill="#28BA54" stroke="none" cx="6" cy="50" r="6">
+            <animateattributeName="opacity"dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.1" / >
+            </circle>
+            <circle fill="#28BA54" stroke="none" cx="26" cy="50" r="6">
+            <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.2" / >
+            </circle>
+            <circle fill="#28BA54" stroke="none" cx="46" cy="50" r="6">
+            <animate attributeName="opacity" dur="1s" values="0;1;0" repeatCount="indefinite" begin="0.3" / >
+            </circle>
+            </svg>
+
+    div.descrStat.blackScroll(v-if="!isTextActive")
+            div.descrTextItem
+                div.descrTextItemHead
+                    div.diType Упоминаемость за:
+                    div.diButton(v-bind:class="{active:analiticsPeriod==3}" v-on:click="analiticsPeriodChange(3)") День
+                    div.diButton(v-bind:class="{active:analiticsPeriod==7}" v-on:click="analiticsPeriodChange(7)") Неделю
+                    div.diButton(v-bind:class="{active:analiticsPeriod==30}" v-on:click="analiticsPeriodChange(30)") Месяц
+                div.descrTextItemBody
+                    div.diTextWr
+                        div.diAutor
+                            <svg width="24px" height="18px" viewBox="0 0 24 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                            <desc>Created with Sketch.</desc>
+                            <defs></defs>
+                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Desktop-HD" transform="translate(-299.000000, -588.000000)" fill-rule="nonzero">
+                            <g id="Group-2" transform="translate(113.000000, 561.000000)">
+                            <g id="jam-tags" transform="translate(186.000000, 24.000000)">
+                            <g id="Icon">
+                            <path d="M11.586,18.071 L13,16.657 L14.414,18.071 L20.579,11.906 L21.669,8.354 L19.185,5.871 L18.106,6.207 L16.508,4.609 L18.591,3.96 C19.3005042,3.73952848 20.0737523,3.93052999 20.599,4.456 L23.082,6.939 C23.6051778,7.4622213 23.7967381,8.23153964 23.58,8.939 L22.345,12.97 L14.415,20.9 L11.585,18.072 L11.586,18.071 Z M14.236,3.75 L16.718,6.233 C17.2411778,6.7562213 17.4327381,7.52553964 17.216,8.233 L15.981,12.261 L8.051,20.192 L0.271,12.414 L8.17,4.516 L12.227,3.254 C12.9365042,3.03352848 13.7097523,3.22452999 14.235,3.75 L14.236,3.75 Z M3.1,12.414 L8.05,17.364 L14.214,11.199 L15.304,7.647 L12.82,5.164 L9.235,6.279 L3.1,12.414 Z M10.524,9.939 C10.1340651,9.56238829 9.9776811,9.00468316 10.1149543,8.48023901 C10.2522274,7.95579487 10.6617949,7.54622743 11.186239,7.40895427 C11.7106832,7.2716811 12.2683883,7.42806512 12.645,7.818 C13.2032474,8.40791566 13.1905741,9.33498809 12.6164096,9.90942336 C12.0422452,10.4838586 11.1151789,10.4969692 10.525,9.939 L10.524,9.939 Z M17.41,10.961 L18.192,8.083 C18.642,8.235 18.947,8.408 19.109,8.601 C19.6413069,9.2356053 19.5584863,10.1815512 18.924,10.714 C18.634,10.958 18.129,11.04 17.41,10.961 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                            <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </g>
+                            </svg>
+                            span &nbsp; Ключевые слова:
+                        div.diText
+
+                            div.dKeyWordsRow(v-for="kw in keywords" )
+                                div.dKeyWordsRowDel
+                                    <svg v-on:click="deleteKeyword(kw)" width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                    <desc>Created with Sketch.</desc>
+                                    <defs></defs>
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Desktop-HD" transform="translate(-321.000000, -566.000000)" fill-rule="nonzero">
+                                    <g id="Group-2" transform="translate(115.000000, 561.000000)">
+                                    <g id="ic-sharp-delete-forever" transform="translate(201.000000, 2.000000)">
+                                    <g id="Icon">
+                                    <path d="M6,21 L18,21 L18,7 L6,7 L6,21 Z M8.46,11.88 L9.87,10.47 L12,12.59 L14.12,10.47 L15.53,11.88 L13.41,14 L15.53,16.12 L14.12,17.53 L12,15.41 L9.88,17.53 L8.47,16.12 L10.59,14 L8.46,11.88 Z M15.5,4 L14.5,3 L9.5,3 L8.5,4 L5,4 L5,6 L19,6 L19,4 L15.5,4 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                                    <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </g>
+                                    </svg>
+                                div.dKeyWordsRowText {{kw.keyword}}
+                            div.dKeyWordsRow.last
+                                input(type="text" placeholder="Добавьте ключевое слово" v-model="insertKeywordText" v-on:keyDown="dKeyWordsRowKeyDown($event)")
+                                span &nbsp;
+                                span
+                                <svg v-on:click="addKeyWord()" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                                <desc>Created with Sketch.</desc>
+                                <defs></defs>
+                                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g id="Desktop-HD" transform="translate(-343.000000, -562.000000)" fill-rule="nonzero">
+                                <g id="Group-2" transform="translate(115.000000, 560.000000)">
+                                <g id="bx-bx-message-square-add" transform="translate(226.000000, 0.000000)">
+                                <g id="Icon">
+                                <path d="M16,2 L8,2 C4.691,2 2,4.691 2,8 L2,21 C2,21.5522847 2.44771525,22 3,22 L16,22 C19.309,22 22,19.309 22,16 L22,8 C22,4.691 19.309,2 16,2 Z M20,16 C20,18.206 18.206,20 16,20 L4,20 L4,8 C4,5.794 5.794,4 8,4 L16,4 C18.206,4 20,5.794 20,8 L20,16 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                                <polygon id="Icon-Shape" fill="#FFFFFF" points="13 7 11 7 11 11 7 11 7 13 11 13 11 17 13 17 13 13 17 13 17 11 13 11"></polygon>
+                                <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </g>
+                                </svg>
+            div( id="container" style="width: 500px; height: 400px;")

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div(class="main-page loaded" id="main-page")
+    h1 Группы компаний
+    div.center
+      each group in groups
+        div.groupItem(groupId=group.id)
+          div.groupTitle=group.title
+          div.clientWr
+            each client in group.clients
+              div.clientItem
+                a(href="/page/point/"+client.id)=client.title
+
+

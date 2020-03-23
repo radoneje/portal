@@ -1,15 +1,153 @@
 extends layout
 
 block content
-  div(class="main-page loaded" id="main-page")
-    h1 Группы компаний
-    div.center
-      each group in groups
-        div.groupItem(groupId=group.id)
-          div.groupTitle=group.title
-          div.clientWr
-            each client in group.clients
-              div.clientItem
-                a(href="/page/point/"+client.id)=client.title
+  div.main-page.loaded(id="main-page")
+    div.Content
+      div.header
+        div.header
+          div.hearefLogo
+            <svg width="54px" height="59px" viewBox="0 0 54 59" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+            <desc>Created with Sketch.</desc>
+            <defs>
+            <linearGradient x1="98.8046439%" y1="117.857488%" x2="0.739504278%" y2="116.950063%" id="linearGradient-1">
+            <stop stop-color="#0E8BFF" offset="0%"></stop>
+            <stop stop-color="#05EDD1" offset="100%"></stop>
+            </linearGradient>
+            <linearGradient x1="-49.999986%" y1="49.9999718%" x2="61.6024316%" y2="138.397636%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#26164F" offset="100%"></stop>
+            </linearGradient>
+            </defs>
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Desktop-HD" transform="translate(-597.000000, -231.000000)" fill-rule="nonzero">
+            <g id="logo-group" transform="translate(597.000000, 231.000000)">
+            <path d="M52.9396,22.4361 C52.4579,22.5565 51.9763,22.6367 51.4545,22.6367 C48.2436,22.6367 45.6348,20.0279 45.6348,16.817 C45.6348,14.6095 46.879,12.683 48.7253,11.6796 C47.16,9.39184 45.2736,7.3449 43.1062,5.65918 C42.0627,7.30476 40.2566,8.38844 38.2096,8.38844 C34.9987,8.38844 32.3899,5.77959 32.3899,2.56871 C32.3899,1.8864 32.5103,1.28435 32.711,0.682313 C30.7844,0.240817 28.7375,0 26.6504,0 L26.6504,5.77959 C38.1695,5.77959 47.481,15.0912 47.481,26.6102 C47.481,38.1293 38.1695,47.4408 26.6504,47.4408 L26.6504,35.4401 L21.6334,38.3299 L21.6334,22.8374 L26.6504,25.7272 L26.6504,11.519 C15.1314,11.519 5.81982,20.8306 5.81982,32.3497 C5.81982,43.8687 15.1314,53.1803 26.6504,53.1803 C28.7375,53.1803 30.7443,52.9395 32.6708,52.498 C32.4702,51.8959 32.3498,51.2939 32.3498,50.6116 C32.3498,47.4007 34.9586,44.7918 38.1695,44.7918 C40.2566,44.7918 42.0627,45.8755 43.0661,47.481 C45.2334,45.7551 47.1198,43.7483 48.6851,41.4605 C46.879,40.4973 45.5947,38.5306 45.5947,36.3231 C45.5947,33.1122 48.2035,30.5034 51.4144,30.5034 C51.9361,30.5034 52.4178,30.5837 52.8994,30.7041 C53.1001,29.3395 53.2205,27.9748 53.2205,26.5299 C53.2606,25.1653 53.1402,23.8007 52.9396,22.4361 Z" id="Shape" fill="#FFFFFF"></path>
+            <path d="M26.6102,5.73923 C24.5231,5.73923 22.5163,5.98004 20.5497,6.42154 C20.7503,7.02358 20.8707,7.66576 20.8707,8.30793 C20.8707,11.5188 18.2619,14.1277 15.051,14.1277 C12.9639,14.1277 11.1578,13.044 10.1544,11.4385 C7.98707,13.1243 6.10068,15.1712 4.53537,17.459 C6.38163,18.4222 7.62585,20.3889 7.62585,22.5964 C7.62585,25.8073 5.01701,28.4161 1.80612,28.4161 C1.28435,28.4161 0.802721,28.3358 0.321088,28.2154 C0.120408,29.58 0,30.9447 0,32.3494 C0,33.7542 0.120408,35.159 0.321088,36.5236 C0.802721,36.4032 1.28435,36.3229 1.80612,36.3229 C5.01701,36.3229 7.62585,38.9317 7.62585,42.1426 C7.62585,44.3501 6.38163,46.2766 4.53537,47.28 C6.10068,49.5678 7.98707,51.6147 10.1544,53.3005 C11.198,51.695 13.0041,50.6113 15.051,50.6113 C18.2619,50.6113 20.8707,53.2202 20.8707,56.4311 C20.8707,57.0732 20.7503,57.7154 20.5497,58.3175 C22.4762,58.759 24.5231,58.9998 26.5701,58.9998 L26.5701,53.2202 C15.051,53.2202 5.73945,43.9086 5.73945,32.3896 C5.73945,20.8705 15.051,11.559 26.5701,11.559 L26.5701,25.7671 L34.9585,30.5834 L26.5701,35.3998 L26.5701,47.4005 C38.0891,47.4005 47.4007,38.0889 47.4007,26.5698 C47.481,15.0909 38.1292,5.73923 26.6102,5.73923 Z" id="Shape" fill="url(#linearGradient-1)"></path>
+            <path d="M26.6102,5.73923 C24.5231,5.73923 22.5163,5.98004 20.5497,6.42154 C20.7503,7.02358 20.8707,7.66576 20.8707,8.30793 C20.8707,11.5188 18.2619,14.1277 15.051,14.1277 C12.9639,14.1277 11.1578,13.044 10.1544,11.4385 C7.98707,13.1243 6.10068,15.1712 4.53537,17.459 C6.38163,18.4222 7.62585,20.3889 7.62585,22.5964 C7.62585,25.8073 5.01701,28.4161 1.80612,28.4161 C1.28435,28.4161 0.802721,28.3358 0.321088,28.2154 C0.120408,29.58 0,30.9447 0,32.3494 C0,33.7542 0.120408,35.159 0.321088,36.5236 C0.802721,36.4032 1.28435,36.3229 1.80612,36.3229 C5.01701,36.3229 7.62585,38.9317 7.62585,42.1426 C7.62585,44.3501 6.38163,46.2766 4.53537,47.28 C6.10068,49.5678 7.98707,51.6147 10.1544,53.3005 C11.198,51.695 13.0041,50.6113 15.051,50.6113 C18.2619,50.6113 20.8707,53.2202 20.8707,56.4311 C20.8707,57.0732 20.7503,57.7154 20.5497,58.3175 C22.4762,58.759 24.5231,58.9998 26.5701,58.9998 L26.5701,53.2202 C15.051,53.2202 5.73945,43.9086 5.73945,32.3896 C5.73945,20.8705 15.051,11.559 26.5701,11.559 L26.5701,25.7671 L34.9585,30.5834 L26.5701,35.3998 L26.5701,47.4005 C38.0891,47.4005 47.4007,38.0889 47.4007,26.5698 C47.481,15.0909 38.1292,5.73923 26.6102,5.73923 Z" id="Shape" fill-opacity="0.4" fill="url(#linearGradient-2)" style="mix-blend-mode: soft-light;"></path>
+            </g>
+            </g>
+            </g>
+            </svg>
+          div.aHeaderTitle #YAMAL
+            span NEWS
+          div.aHeaderSubTitle Демонстрационная система обмена без поиска и аналитики
+      div.Wrapper
+        div.smiBox
+          div.smiFindWr
+            div.smiFind
+              input.smiFindInput(type="text" placeholder='Введите текст для поиска')
+              <svg width="19px" height="19px" viewBox="0 0 19 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+              <desc>Created with Sketch.</desc>
+              <defs></defs>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Desktop-HD" transform="translate(-471.000000, -595.000000)" fill-rule="nonzero">
+              <g id="Group-2" transform="translate(115.000000, 587.000000)">
+              <g id="bx-bx-search-alt" transform="translate(354.000000, 6.000000)">
+              <g id="Icon">
+              <path d="M10,18 C11.7749766,17.9996354 13.4988042,17.4054306 14.897,16.312 L19.293,20.708 L20.707,19.294 L16.311,14.898 C17.4049999,13.4996645 17.9995731,11.7754373 18,10 C18,5.589 14.411,2 10,2 C5.589,2 2,5.589 2,10 C2,14.411 5.589,18 10,18 Z M10,4 C13.309,4 16,6.691 16,10 C16,13.309 13.309,16 10,16 C6.691,16 4,13.309 4,10 C4,6.691 6.691,4 10,4 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+              <path d="M11.412,8.586 C11.791,8.966 12,9.468 12,10 L14.0000056,10 C14.0017876,8.93842707 13.5790861,7.92019893 12.826,7.172 C11.312,5.66 8.687,5.66 7.174,7.172 L8.586,8.588 C9.346,7.83 10.656,7.832 11.412,8.586 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+              <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+              </g>
+              </g>
+              </g>
+              </g>
+              </g>
+              </svg>
+              <svg v-on:click="isShowKW=!isShowKW"style="margin-left:10px"width="13px" height="11px" viewBox="0 0 13 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+              <desc>Created with Sketch.</desc>
+              <defs></defs>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Desktop-HD" transform="translate(-337.000000, -587.000000)" fill-rule="nonzero">
+              <g id="Group-2" transform="translate(115.000000, 568.000000)">
+              <g id="maki-triangle-15" transform="translate(221.000000, 17.000000)">
+              <g id="Icon">
+              <g id="Icon-Group" transform="translate(7.500000, 7.500000) scale(-1, 1) rotate(-180.000000) translate(-7.500000, -7.500000) translate(1.000000, 2.000000)" fill="#FFFFFF">
+              <path d="M6.538,0 C6.244,0 6.05,0.177 5.923,0.385 L0.077,9.923 C0,10 0,10.153 0,10.308 C0,10.846 0.385,11 0.692,11 L12.308,11 C12.692,11 13,10.846 13,10.308 C13,10.154 13,10.077 12.923,9.923 L7.153,0.385 C7.029,0.177 6.789,0 6.539,0 L6.538,0 Z" id="Icon-Shape"></path>
+              </g>
+              <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="15" height="15"></rect>
+              </g>
+              </g>
+              </g>
+              </g>
+              </g>
+              </svg>
+          div.indexKW(v-if="isShowKW")
+            div
+              <svg width="24px" height="18px" viewBox="0 0 24 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+              <desc>Created with Sketch.</desc>
+              <defs></defs>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <g id="Desktop-HD" transform="translate(-299.000000, -588.000000)" fill-rule="nonzero">
+              <g id="Group-2" transform="translate(113.000000, 561.000000)">
+              <g id="jam-tags" transform="translate(186.000000, 24.000000)">
+              <g id="Icon">
+              <path d="M11.586,18.071 L13,16.657 L14.414,18.071 L20.579,11.906 L21.669,8.354 L19.185,5.871 L18.106,6.207 L16.508,4.609 L18.591,3.96 C19.3005042,3.73952848 20.0737523,3.93052999 20.599,4.456 L23.082,6.939 C23.6051778,7.4622213 23.7967381,8.23153964 23.58,8.939 L22.345,12.97 L14.415,20.9 L11.585,18.072 L11.586,18.071 Z M14.236,3.75 L16.718,6.233 C17.2411778,6.7562213 17.4327381,7.52553964 17.216,8.233 L15.981,12.261 L8.051,20.192 L0.271,12.414 L8.17,4.516 L12.227,3.254 C12.9365042,3.03352848 13.7097523,3.22452999 14.235,3.75 L14.236,3.75 Z M3.1,12.414 L8.05,17.364 L14.214,11.199 L15.304,7.647 L12.82,5.164 L9.235,6.279 L3.1,12.414 Z M10.524,9.939 C10.1340651,9.56238829 9.9776811,9.00468316 10.1149543,8.48023901 C10.2522274,7.95579487 10.6617949,7.54622743 11.186239,7.40895427 C11.7106832,7.2716811 12.2683883,7.42806512 12.645,7.818 C13.2032474,8.40791566 13.1905741,9.33498809 12.6164096,9.90942336 C12.0422452,10.4838586 11.1151789,10.4969692 10.525,9.939 L10.524,9.939 Z M17.41,10.961 L18.192,8.083 C18.642,8.235 18.947,8.408 19.109,8.601 C19.6413069,9.2356053 19.5584863,10.1815512 18.924,10.714 C18.634,10.958 18.129,11.04 17.41,10.961 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+              <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+              </g>
+              </g>
+              </g>
+              </g>
+              </g>
+              </svg>
+              span &nbsp; Ключевые слова:
+            div.diText
+
+              div.dKeyWordsRow(v-for="kw in keywords" )
+                div.dKeyWordsRowDel
+                  <svg v-on:click="deleteKeyword(kw)" width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                  <desc>Created with Sketch.</desc>
+                  <defs></defs>
+                  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <g id="Desktop-HD" transform="translate(-321.000000, -566.000000)" fill-rule="nonzero">
+                  <g id="Group-2" transform="translate(115.000000, 561.000000)">
+                  <g id="ic-sharp-delete-forever" transform="translate(201.000000, 2.000000)">
+                  <g id="Icon">
+                  <path d="M6,21 L18,21 L18,7 L6,7 L6,21 Z M8.46,11.88 L9.87,10.47 L12,12.59 L14.12,10.47 L15.53,11.88 L13.41,14 L15.53,16.12 L14.12,17.53 L12,15.41 L9.88,17.53 L8.47,16.12 L10.59,14 L8.46,11.88 Z M15.5,4 L14.5,3 L9.5,3 L8.5,4 L5,4 L5,6 L19,6 L19,4 L15.5,4 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                  <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                  </g>
+                  </g>
+                  </g>
+                  </g>
+                  </g>
+                  </svg>
+                div.dKeyWordsRowText {{kw.keyword}}
+              div.dKeyWordsRow.last
+                input(type="text" placeholder="Добавьте ключевое слово" v-model="insertKeywordText" v-on:keyDown="dKeyWordsRowKeyDown($event)")
+                span &nbsp;
+                span
+                <svg v-on:click="addKeyWord()" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+                <desc>Created with Sketch.</desc>
+                <defs></defs>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Desktop-HD" transform="translate(-343.000000, -562.000000)" fill-rule="nonzero">
+                <g id="Group-2" transform="translate(115.000000, 560.000000)">
+                <g id="bx-bx-message-square-add" transform="translate(226.000000, 0.000000)">
+                <g id="Icon">
+                <path d="M16,2 L8,2 C4.691,2 2,4.691 2,8 L2,21 C2,21.5522847 2.44771525,22 3,22 L16,22 C19.309,22 22,19.309 22,16 L22,8 C22,4.691 19.309,2 16,2 Z M20,16 C20,18.206 18.206,20 16,20 L4,20 L4,8 C4,5.794 5.794,4 8,4 L16,4 C18.206,4 20,5.794 20,8 L20,16 Z" id="Icon-Shape" fill="#FFFFFF"></path>
+                <polygon id="Icon-Shape" fill="#FFFFFF" points="13 7 11 7 11 11 7 11 7 13 11 13 11 17 13 17 13 13 17 13 17 11 13 11"></polygon>
+                <rect id="Icon-Rectangle-path" fill-opacity="0" fill="#000000" x="0" y="0" width="24" height="24"></rect>
+                </g>
+                </g>
+                </g>
+                </g>
+                </g>
+                </svg>
+          include elements/indexitem
+        div.descrBox
+          include elements/indexDescr
+        div.ContactWr(v-on:click="isContactShow=false" v-if="isContactShow")
+          div.ContactBox(v-on:click.stop.prevent=";;")
+            div(style="font-size:18px; margin-bottom: 20px;") Контакты:
+            div Иванов Иван Иванович
+            div +7 (000) 000 00 00
+            div.diButton(style=" margin-top: 40px;" v-on:click="isContactShow=false") Закрыть
+  script(src="/javascripts/indexscript.js")
+
 
 

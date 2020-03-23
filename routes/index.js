@@ -21,7 +21,7 @@ router.get('/', login, async (req, res)=> {
     g.clients=clients;
     groups.push(g)
   }
-  res.render('index', { title: 'Выбор группы', lang:lang.en, groups:groups });
+  res.render('index', { title: 'Система обмена', lang:lang.en, groups:groups });
 
 });
  function login(req, res, next){

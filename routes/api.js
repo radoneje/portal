@@ -69,9 +69,10 @@ catch (e) {
   res.json({status:-3, err:e});
 }
 });
+var logins=[{id:1,pass:"123", email:"d@rustv.ru",name:"",suName:""  },{id:2,pass:"123", email:"demo@demo.ru",name:"",suName:""  }]
 router.post('/login', async (req, res, next)=> {
   delete req.session.user;
-  var q=await req.knex
+ /*var q=await req.knex
       .select("*")
       .from("t_users")
       .where({email:req.body.login, password:req.body.pass, isDeleted:false});
@@ -80,11 +81,12 @@ router.post('/login', async (req, res, next)=> {
   var utp=await req.knex
       .select("*")
       .from("t_userToGroup")
-      .where({userId:q[0].id});
+      .where({userId:q[0].id});*/
+ var utp=logins.filter(e=>{return e.email==req.body.login && e.pass==req.body.pass});
   if(utp.length==0)
   {return res.status(404).send("not found")};
-  req.session.user=q[0];
-  res.json({id:q[0].id, name:q[0].name, suName:q[0].suName});
+  req.session.user=utp[0];
+  res.json({id:utp[0].id, name:utp[0].name, suName:utp[0].suName});
 });
 router.get("/user", async (req, res)=> {
   if (!req.session || !req.session.user)
@@ -291,6 +293,19 @@ router.get("/list/:clientId", async (req, res)=> {
       .orderBy([ { column: 'newsDate', order: 'desc' }, "sort"])
       .limit(5).offset(skip)
 
+  return res.json(list);
+
+})
+router.get("/smi", async (req, res)=> {
+  if (!req.session || !req.session.user)
+    return res.status(401.7).json({status: -1, msg: "access deny"});
+  var skip=req.headers["x-skip"];
+  var list=await req.knex.select("*")
+      .from("t_clients")
+      //.orderBy([ { column: 'newsDate', order: 'desc' }, "sort"])
+      .limit(5).offset(skip)
+
+  list.forEach(r=>{r.lastDate=(new Date())})
   return res.json(list);
 
 })
